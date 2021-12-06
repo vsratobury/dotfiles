@@ -19,5 +19,10 @@ if status is-login
     if not contains fish_user_paths $HOME/.fzf/bin
         set -pU fish_user_paths $HOME/.fzf/bin
     end
+
+    # Установка директории для python
+    if not contains fish_user_paths $HOME/Library/Python/3.9/bin
+        set -pU fish_user_paths $HOME/Library/Python/3.9/bin
+    end
 end
 

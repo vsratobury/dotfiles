@@ -41,4 +41,34 @@ make install CMAKE_BUILD_TYPE=Release
 port install fish && chpass -s /opt/local/bin/fish ${USER}
 # curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
 
+# install go and others
+echo "download latest go package, then return ot install"
+open https://go.dev/dl/
+
+read -n 1 -s -r -p "Press any key to continue"
+
+go install golang.org/x/tools/gopls@latest
+go install golang.org/x/lint@latest
+go install golang.org/x/tools/cmd/godoc@latest
+
+# install cmake lsp
+port install py39-pip
+port select --set pip pip39
+port select --set pip3 pip39
+pip install cmake-language-server
+
+# install lua lsp
+git clone https://github.com/sumneko/lua-language-server ~/lualsp
+cd ~/lualsp
+git submodule update --init --recursive
+cd 3rd/luamake
+./compile/install.sh
+cd ../..
+./3rd/luamake/luamake rebuild
+
+# install clangd
+curl -L -o clangd.zip https://github.com/clangd/clangd/releases/download/10.0.0/clangd-mac-10.0.0.zip
+unzip clangd.zip && cd clangd_10.0.0
+cp bin/clangd /usr/local/bin/
+
 echo "setup finished, now open kitty.app"

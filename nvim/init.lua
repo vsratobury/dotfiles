@@ -193,7 +193,7 @@ for ls, cfg in pairs({
     capabilities = capabilities
   },
   sumneko_lua = {
-    cmd = {"/opt/local/bin/lua-language-server"},
+    cmd = {"/Users/vsratobury/lualsp/bin/macOS/lua-language-server"},
     settings = {
       Lua = {
         runtime = {
