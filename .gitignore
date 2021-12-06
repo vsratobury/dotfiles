@@ -1,4 +1,3 @@
 fish/fish_variables
 nvim/.nvimlog
-nvim/plugin/
-nvim/plugin/packer_compiled.lua
+nvim/plugin

@@ -50,5 +50,5 @@ vim.tbl_map(function(c) cmd(fmt('autocmd %s', c)) end, {
   'BufWritePre *.go lua GoImports(1000)',
   -- 'FileType go syntax sync fromstart; syntax on',
   'FileType go set makeprg=go\\ test',
-})--
+})
 
