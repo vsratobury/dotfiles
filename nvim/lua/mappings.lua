@@ -19,7 +19,7 @@ g.mapleader = ' '
 -- FZF mappings
 map('n', '<leader>/', '<cmd>Lines<CR>')
 map('n', '<leader>:', '<cmd>History:<CR>')
-map('n', '<leader>e', '<cmd>Files<CR>')
+map('n', '<leader>e', '<cmd>Telescope fd<CR>')
 map('n', '<leader>g', '<cmd>Rg<CR>')
 map('n', '<leader>j', '<cmd>Buffers<CR>')
 map('n', '<leader>w', '<cmd>Windows<CR>')

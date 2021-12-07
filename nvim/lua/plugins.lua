@@ -14,7 +14,6 @@ end
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'nvim-lua/plenary.nvim'
-    use 'jiangmiao/auto-pairs'
     use 'vsratobury/vim-cmake'
     use 'tpope/vim-fugitive'
     use 'sebdah/vim-delve'
@@ -26,7 +25,9 @@ return require('packer').startup(function(use)
     use (require('configure.lsp'))
     use (require('configure.treesitter'))
     use (require('configure.orgmode'))
-    use ('nvim-telescope/telescope.nvim')
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
+    use (require('configure.telescope'))
+    use (require('configure.autopairs'))
 
     if packer_bootstrap then
         require('packer').sync()
