@@ -3,6 +3,7 @@ return {
     config = function()
         require('hardline').setup({
             bufferline = true,
+            theme = 'nord',
             sections = {
                 {class = 'mode', item = require('hardline.parts.mode').get_item},
                 {class = 'med', item =  require('hardline.parts.keymap').get_item},

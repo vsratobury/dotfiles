@@ -1,5 +1,9 @@
 return {
     'nvim-telescope/telescope.nvim',
+    reqires = {
+        'tami5/sqlite.lua',
+        'nvim-telescope/telescope-cheat.nvim'
+    },
     config = function ()
         require('telescope').setup{
         defaults = {
@@ -38,5 +42,6 @@ return {
         }
     }
     require('telescope').load_extension('fzf')
+    require'telescope'.load_extension("cheat")
 end,
 }

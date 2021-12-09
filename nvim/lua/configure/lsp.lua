@@ -29,7 +29,7 @@ return {
                 capabilities = capabilities
             },
             sumneko_lua = {
-                cmd = {"/Users/vsratobury/lualsp/bin/macOS/lua-language-server"},
+                cmd = {"/Users/vsratobury/.local/lualsp/bin/macOS/lua-language-server"},
                 settings = {
                     Lua = {
                         runtime = {

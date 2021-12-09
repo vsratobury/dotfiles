@@ -18,16 +18,19 @@ return require('packer').startup(function(use)
     use 'tpope/vim-fugitive'
     use 'sebdah/vim-delve'
 
-    use (require('configure.ui'))
+    use (require('configure.ui-nord'))
     use (require('configure.statusline'))
-    use (require('configure.fzf'))
+    -- use (require('configure.fzf'))
     use (require('configure.completions'))
     use (require('configure.lsp'))
     use (require('configure.treesitter'))
-    use (require('configure.orgmode'))
+    -- use (require('configure.orgmode'))
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
+    use {'nvim-telescope/telescope-cheat.nvim'}
+    use {'tami5/sqlite.lua'}
     use (require('configure.telescope'))
     use (require('configure.autopairs'))
+    use (require('configure.nest'))
 
     if packer_bootstrap then
         require('packer').sync()
