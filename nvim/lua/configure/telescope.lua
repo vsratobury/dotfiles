@@ -1,8 +1,8 @@
 return {
     'nvim-telescope/telescope.nvim',
-    reqires = {
-        'tami5/sqlite.lua',
-        'nvim-telescope/telescope-cheat.nvim'
+    requires = {
+        'nvim-telescope/telescope-project.nvim',
+        {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
     },
     config = function ()
         require('telescope').setup{
@@ -39,9 +39,12 @@ return {
                 override_file_sorter = true,
                 case_mode = 'smart_case',
             },
+            project = {
+                base_dirs = { vim.env.PRJ }
+            }
         }
     }
+    require('telescope').load_extension('project')
     require('telescope').load_extension('fzf')
-    require'telescope'.load_extension("cheat")
 end,
 }

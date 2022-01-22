@@ -46,8 +46,11 @@ end
 vim.tbl_map(function(c) cmd(fmt('autocmd %s', c)) end, {
   'TermOpen * lua InitTerminalWindow()',
   'TextYankPost * lua vim.highlight.on_yank {timeout = 400, on_visual = false}',
-  'BufWritePre *.go,*.h,*.cc,*.c,*.lua,CMake* lua vim.lsp.buf.formatting()',
+  'BufWritePre *.go,*.h,*.hh,*.cc,*.c,*.cpp,*.lua, lua vim.lsp.buf.formatting_sync()',
   'BufWritePre *.go lua GoImports(1000)',
+  'BufWritePre CMake* % !cmake-format -',
+  'BufEnter *.fish :lua vim.api.nvim_buf_set_option(0, \"commentstring\", \"# %s\")',
+  'BufFilePost *.fish :lua vim.api.nvim_buf_set_option(0, \"commentstring\", \"# %s\")',
   -- 'FileType go syntax sync fromstart; syntax on',
   'FileType go set makeprg=go\\ test',
 })

@@ -13,6 +13,7 @@ return {
         'hrsh7th/vim-vsnip',
         'hrsh7th/cmp-vsnip',
         'rafamadriz/friendly-snippets',
+        'mtoohey31/cmp-fish',
     },
     config = function()
         local cmp = require('cmp')
@@ -51,6 +52,7 @@ return {
             }, {
                 { name = 'buffer' },
                 { name = 'path' },
+                { name = 'fish' }
             })
         })
 

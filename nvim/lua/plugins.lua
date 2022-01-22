@@ -1,6 +1,5 @@
 -- plugins.lua
 --
-
 -------------------- HELPERS -------------------------------
 local fn = vim.fn
 
@@ -11,26 +10,28 @@ end
 
 -------------------- PLUGINS -------------------------------
 
+require('packer').init({ensure_dependencies = true, auto_clean = true})
+
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'nvim-lua/plenary.nvim'
     use 'vsratobury/vim-cmake'
+    use 'ericvw/vim-fish'
     use 'tpope/vim-fugitive'
     use 'sebdah/vim-delve'
 
-    use (require('configure.ui-nord'))
+    use (require('configure.ui'))
+    use (require('configure.theme'))
     use (require('configure.statusline'))
     -- use (require('configure.fzf'))
     use (require('configure.completions'))
     use (require('configure.lsp'))
     use (require('configure.treesitter'))
     -- use (require('configure.orgmode'))
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
-    use {'nvim-telescope/telescope-cheat.nvim'}
-    use {'tami5/sqlite.lua'}
     use (require('configure.telescope'))
     use (require('configure.autopairs'))
     use (require('configure.nest'))
+
 
     if packer_bootstrap then
         require('packer').sync()
