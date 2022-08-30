@@ -9,7 +9,7 @@ local opt = vim.opt
 
 cmd [[lang en_US.UTF-8]]            -- Setup LANG
 
-local indent, width = 4, 80
+local indent, width = 2, 80
 opt.hidden = true                   -- Allow hide modified buffers
 opt.colorcolumn = tostring(width)   -- Line length marker
 opt.completeopt = {'menuone', 'noinsert'}  -- Completion options
