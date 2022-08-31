@@ -2,7 +2,8 @@
 return {
     'shaunsingh/nord.nvim',
     requires = {
-        {'lukas-reineke/indent-blankline.nvim',
+        {
+          'lukas-reineke/indent-blankline.nvim',
         config = function()
             vim.g['indent_blankline_char'] = '┊'
             vim.g['indent_blankline_buftype_exclude'] = {'terminal'}

@@ -18,60 +18,75 @@ return {
     config = function()
         local cmp = require('cmp')
         cmp.setup({
-            snippet = {
-                expand = function(args)
-                    vim.fn["vsnip#anonymous"](args.body)
-                end,
-            },
-            mapping = {
-                ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-                ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-                ['<C-y>'] = cmp.mapping.complete, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-                ['<C-e>'] = cmp.mapping({
-                    i = cmp.mapping.abort(),
-                    c = cmp.mapping.close(),
-                }),
-                ['<CR>'] = cmp.mapping({
-                    i = cmp.mapping.confirm({ select = false, }),
-                    c = cmp.mapping.confirm({ select = false, }),
-                }),
-                ['<C-n>'] = cmp.mapping(cmp.select_next_item(), { 'i', 'c' }),
-                ['<C-p>'] = cmp.mapping(cmp.select_prev_item(), { 'i', 'c' }),
-                ["<Tab>"] = cmp.mapping(function(fallback)
-                    if not cmp.visible() then
-                        cmp.select_next_item()
-                    elseif has_words_before() then
-                        cmp.complete()
-                    else
-                        fallback()
-                    end
-                end, { "i", "s" }),
-            },
-            sources = cmp.config.sources({
-                { name = 'nvim_lsp' },
-                { name = 'treesitter' },
-                { name = 'vsnip' },
-            }, {
-                { name = 'buffer' },
-                { name = 'path' },
-                { name = 'fish' }
-            })
-        })
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      end,
+    },
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+          ['<Tab>'] = function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            else
+              fallback()
+            end
+          end,
+          ['<S-Tab>'] = function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            else
+              fallback()
+            end
+          end,
+          ['<CR>'] = cmp.mapping.confirm({ select = true }),
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<Esc>'] = cmp.mapping.close(),
+          ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' }, -- For vsnip users.
+      -- { name = 'luasnip' }, -- For luasnip users.
+      -- { name = 'ultisnips' }, -- For ultisnips users.
+      -- { name = 'snippy' }, -- For snippy users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
 
-        -- -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-        -- cmp.setup.cmdline('/', {
-        --     sources = {
-        --         { name = 'buffer' }
-        --     }
-        -- })
-        --
-        -- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-        -- cmp.setup.cmdline(':', {
-        --     sources = cmp.config.sources({
-        --         { name = 'path' }
-        --     }, {
-        --         { name = 'cmdline' }
-        --     })
-        -- })
-    end,
-}
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+end, }

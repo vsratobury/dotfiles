@@ -1,11 +1,12 @@
 local M = {}
 
+-- use TAB/S-TAB for select items in menu
+vim.keymap.set('i', '<Tab>', function()
+         return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
+       end, { expr = true })
 
 M.default = {
     { '<ESC>', '<C-\\><C-n>', mode = 't' },
--- use TAB/S-TAB for select items in menu
-    {'<S-Tab>', '<C-p>', mode = 'i'},
-    {'<Tab>', '<C-n>', mode = 'i'},
     -- change keymap
     { '<C-Space>', 'i<C-^><ESC>', mode = 'n' },
     { '<C-Space>', '<C-^>', mode = 'i' },

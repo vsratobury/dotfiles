@@ -21,11 +21,11 @@ return require('packer').startup(function(use)
     use 'tpope/vim-fugitive'
     use 'sebdah/vim-delve'
 
-    use (require('configure.ui'))
+    -- use (require('configure.ui'))
     use (require('configure.theme'))
     use (require('configure.statusline'))
     -- use (require('configure.fzf'))
-    -- use (require('configure.completions'))
+    use (require('configure.completions'))
     use (require('configure.lsp'))
     use (require('configure.treesitter'))
     -- use (require('configure.orgmode'))

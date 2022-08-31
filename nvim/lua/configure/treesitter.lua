@@ -1,6 +1,7 @@
 return {
     'nvim-treesitter/nvim-treesitter',
-    branch = '0.5-compat',
+    branch = 'master',
+    -- branch = '0.5-compat',
     run = ':TSUpdate',
     requires = {
         'nvim-treesitter/nvim-treesitter-textobjects',
