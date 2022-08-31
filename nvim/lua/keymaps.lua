@@ -1,7 +1,11 @@
 local M = {}
 
+
 M.default = {
     { '<ESC>', '<C-\\><C-n>', mode = 't' },
+-- use TAB/S-TAB for select items in menu
+    {'<S-Tab>', '<C-p>', mode = 'i'},
+    {'<Tab>', '<C-n>', mode = 'i'},
     -- change keymap
     { '<C-Space>', 'i<C-^><ESC>', mode = 'n' },
     { '<C-Space>', '<C-^>', mode = 'i' },
@@ -26,11 +30,11 @@ M.default = {
         { 'j', ':Telescope buffers<cr>' },
         { 'J', ':Telescope jumplist<cr>' },
         { 'fg', ':Telescope live_grep<cr>'},
-        {'lf', ':lua vim.lsp.buf.formatting()<cr>'},
-        {'ld', ':lua vim.lsp.buf.lsp_code_action()<cr>'},
-        {'lm', ':lua vim.lsp.buf.rename()<cr>'},
-        {'lr', ':Telescope lsp_references<cr>'},
-        {'ls', ':Telescope lsp_document_symbols<cr>'}}
+        { 'lf', ':lua vim.lsp.buf.formatting()<cr>'},
+        { 'ld', ':lua vim.lsp.buf.lsp_code_action()<cr>'},
+        { 'lm', ':lua vim.lsp.buf.rename()<cr>'},
+        { 'lr', ':Telescope lsp_references<cr>'},
+        { 'ls', ':Telescope lsp_document_symbols<cr>'}}
         -- {'i', '<cmd>ClangdSwitchSourceHeader<cr>'},
         -- {'lF', 'ggVG:!clang-format-mp-11 --style=llvm<cr>'},
     },

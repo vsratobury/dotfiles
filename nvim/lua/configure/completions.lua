@@ -26,17 +26,19 @@ return {
             mapping = {
                 ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
                 ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-                ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+                ['<C-y>'] = cmp.mapping.complete, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
                 ['<C-e>'] = cmp.mapping({
                     i = cmp.mapping.abort(),
                     c = cmp.mapping.close(),
                 }),
                 ['<CR>'] = cmp.mapping({
-                    i = cmp.mapping.confirm({ select = true, }),
+                    i = cmp.mapping.confirm({ select = false, }),
                     c = cmp.mapping.confirm({ select = false, }),
                 }),
+                ['<C-n>'] = cmp.mapping(cmp.select_next_item(), { 'i', 'c' }),
+                ['<C-p>'] = cmp.mapping(cmp.select_prev_item(), { 'i', 'c' }),
                 ["<Tab>"] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
+                    if not cmp.visible() then
                         cmp.select_next_item()
                     elseif has_words_before() then
                         cmp.complete()
@@ -56,20 +58,20 @@ return {
             })
         })
 
-        -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-        cmp.setup.cmdline('/', {
-            sources = {
-                { name = 'buffer' }
-            }
-        })
-
-        -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-        cmp.setup.cmdline(':', {
-            sources = cmp.config.sources({
-                { name = 'path' }
-            }, {
-                { name = 'cmdline' }
-            })
-        })
+        -- -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+        -- cmp.setup.cmdline('/', {
+        --     sources = {
+        --         { name = 'buffer' }
+        --     }
+        -- })
+        --
+        -- -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+        -- cmp.setup.cmdline(':', {
+        --     sources = cmp.config.sources({
+        --         { name = 'path' }
+        --     }, {
+        --         { name = 'cmdline' }
+        --     })
+        -- })
     end,
 }
