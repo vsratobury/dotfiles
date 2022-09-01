@@ -43,6 +43,7 @@ opt.keymap = 'russian-jcukenmac'    -- Russian key map
 opt.iminsert = 0                    -- default english key map
 opt.path = opt.path + './lua'       -- search files in lua dir
 opt.mouse = 'nv'                    -- enable mouse
+opt.conceallevel = 1
 
 if vim.env.TERM == 'xterm-kitty' then
     opt.termguicolors = true        -- True color support
