@@ -46,7 +46,7 @@ end,
 vim.api.nvim_create_autocmd('BufWritePre', {
   group = 'Language',
   pattern = { 'CMake*' },
-  command = '% !cmake-format',
+  command = '% !cmake-format -',
 })
 
 vim.api.nvim_create_autocmd('BufEnter', {
