@@ -13,7 +13,7 @@ M.default = {
     { '<C-Space>', '<C-^><ESC>', mode = 'c' },
     -- functional keys
     { mode = 'n',
-    { '<F2>', ':set spell!' },
+    { '<F2>', ':setlocal spell!<cr>' },
     {'K', ':lua vim.lsp.buf.hover()<cr>'},
     {'gd', ':lua vim.lsp.buf.definition()<cr>'},
     {',', ':lua vim.lsp.diagnostic.goto_prev()<cr>'},

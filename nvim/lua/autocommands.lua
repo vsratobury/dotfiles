@@ -79,6 +79,12 @@ vim.api.nvim_create_autocmd('TermOpen', {
   end,
 })
 
+vim.api.nvim_create_autocmd('BufWritePre', {
+  group = 'Others',
+  pattern = { '*' },
+  command = '%s/\\s\\+$//e',
+})
+
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = 'Others',
   pattern = { '*' },
@@ -90,7 +96,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.api.nvim_create_augroup('packer_user_config', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
   group = 'packer_user_config',
-  pattern = { 'plugins.lua', 'init.lua', 'lua/*.lua' },
+  pattern = { '*.lua' },
   command = 'PackerCompile',
 })
 

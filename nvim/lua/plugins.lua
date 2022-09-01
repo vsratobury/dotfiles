@@ -21,6 +21,7 @@ return require('packer').startup(function(use)
     use 'tpope/vim-fugitive'
     use 'sebdah/vim-delve'
 
+
     -- use (require('configure.ui'))
     use (require('configure.theme'))
     use (require('configure.statusline'))
@@ -33,6 +34,7 @@ return require('packer').startup(function(use)
     use (require('configure.autopairs'))
     use (require('configure.nest'))
     use (require('configure.vimtex'))
+    use (require('configure.spell'))
 
 
     if packer_bootstrap then

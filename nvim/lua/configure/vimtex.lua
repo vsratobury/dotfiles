@@ -1,4 +1,4 @@
--- configure UI
+-- configure TEX
 return {
     'lervag/vimtex',
     requires = {
