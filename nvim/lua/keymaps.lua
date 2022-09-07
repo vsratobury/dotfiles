@@ -14,12 +14,15 @@ M.default = {
     -- functional keys
     { mode = 'n',
     { '<F2>', ':setlocal spell!<cr>' },
+    { '<F5>', ':CMakeBuild<cr>' },
+    { '<F3>', ':copen<cr>' },
     {'K', ':lua vim.lsp.buf.hover()<cr>'},
     {'gd', ':lua vim.lsp.buf.definition()<cr>'},
     {',', ':lua vim.lsp.diagnostic.goto_prev()<cr>'},
     {';', ':lua vim.lsp.diagnostic.goto_next()<cr>'}},
     -- with leader key
     { '<Leader>', mode = 'n', {
+        { 't', ':vsplit +terminal<cr>'},
         { 'q', ':q<cr>' },
         { 'Q', ':qa<cr>' },
         { 's', ':w<cr>' },
@@ -30,7 +33,8 @@ M.default = {
         { 'f', ':Telescope find_files<cr>' },
         { 'j', ':Telescope buffers<cr>' },
         { 'J', ':Telescope jumplist<cr>' },
-        { 'fg', ':Telescope live_grep<cr>'},
+        { 'g', ':Telescope live_grep<cr>'},
+        { 'b', ':Telescope current_buffer_fuzzy_find<cr>'},
         { 'lf', ':lua vim.lsp.buf.formatting()<cr>'},
         { 'ld', ':lua vim.lsp.buf.lsp_code_action()<cr>'},
         { 'lm', ':lua vim.lsp.buf.rename()<cr>'},
