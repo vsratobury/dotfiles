@@ -20,7 +20,7 @@ cp -R ./kitty.app /Applications/
 cd -
 mkdir .fonts
 curl -L -o hack-font.zip https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.zip
-unzip -j hack-font.zip -d .fonts/ && rm hack-font.zip 
+unzip -j hack-font.zip -d .fonts/ && rm hack-font.zip
 fc-cache -fv
 
 # install FZF
@@ -70,5 +70,13 @@ cd ../..
 curl -L -o clangd.zip https://github.com/clangd/clangd/releases/download/10.0.0/clangd-mac-10.0.0.zip
 unzip clangd.zip && cd clangd_10.0.0
 cp bin/clangd /usr/local/bin/
+
+# install cppman
+port install -u cppman
+cppman -s cppreference.com > /dev/null && cppman -c > /dev/null &
+echo "please wait ..."
+sleep 15
+echo "continue ..."
+cd ~/.local && mkdir man && cd man && ln -s ~/.cache/cppman/man3 . &
 
 echo "setup finished, now open kitty.app"
