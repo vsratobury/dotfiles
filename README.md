@@ -6,7 +6,7 @@ xcode-select --install
 git clone git@github.com:vsratobury/dotfiles.git ~/.config/
 sudo ./.config/install.sh
 ```
-# Установить дополнительно
+# Можно установить дополнительно
 
 - [Skim](https://skim-app.sourceforge.io) - для интерактивного просмотра PDF
   который компилится из TEX файлов;
