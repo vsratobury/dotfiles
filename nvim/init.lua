@@ -15,6 +15,5 @@ vim.g.mapleader = ' '
 require('disable-builtins')
 require('plugins')
 require('options')
-require('keymaps')
 require('autocommands')
 

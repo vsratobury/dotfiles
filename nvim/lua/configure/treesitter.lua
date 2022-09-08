@@ -10,7 +10,8 @@ return {
   --    branch = '0.5-compat',
   config = function()
     require('nvim-treesitter.configs').setup {
-      ensure_installed = { 'go', 'cpp', 'c', 'lua', 'python', 'fish' },
+      ensure_installed = { 'go', 'cpp', 'c', 'lua', 'python', 'fish', 'vim', 'ninja', 'cmake', 'bash', 'fortran', 'latex',
+        'comment' },
       highlight = {
         enable = true, -- disable = {'go', 'c', 'cpp'},
         additional_vim_regex_highlighting = { 'org' }

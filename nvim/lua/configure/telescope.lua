@@ -1,5 +1,5 @@
 return {
-  'nvim-telescope/telescope.nvim',
+  'nvim-telescope/telescope.nvim', tag = '0.1.0',
   requires = {
     'nvim-telescope/telescope-project.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
