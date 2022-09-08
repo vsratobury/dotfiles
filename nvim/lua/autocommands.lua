@@ -13,34 +13,34 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   group = 'Language',
   pattern = { '*.go' },
   callback = function()
-  local context = { only = { "source.organizeImports" } }
-  vim.validate { context = { context, "t", true } }
+    local context = { only = { "source.organizeImports" } }
+    vim.validate { context = { context, "t", true } }
 
-  local params = vim.lsp.util.make_range_params()
-  params.context = context
+    local params = vim.lsp.util.make_range_params()
+    params.context = context
 
-  -- See the implementation of the textDocument/codeAction callback
-  -- (lua/vim/lsp/handler.lua) for how to do this properly.
-  local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
-  if not result or next(result) == nil then return end
-  local actions = result[1].result
-  if not actions then return end
-  local action = actions[1]
+    -- See the implementation of the textDocument/codeAction callback
+    -- (lua/vim/lsp/handler.lua) for how to do this properly.
+    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
+    if not result or next(result) == nil then return end
+    local actions = result[1].result
+    if not actions then return end
+    local action = actions[1]
 
-  -- textDocument/codeAction can return either Command[] or CodeAction[]. If it
-  -- is a CodeAction, it can have either an edit, a command or both. Edits
-  -- should be executed first.
-  if action.edit or type(action.command) == "table" then
-    if action.edit then
-      vim.lsp.util.apply_workspace_edit(action.edit)
+    -- textDocument/codeAction can return either Command[] or CodeAction[]. If it
+    -- is a CodeAction, it can have either an edit, a command or both. Edits
+    -- should be executed first.
+    if action.edit or type(action.command) == "table" then
+      if action.edit then
+        vim.lsp.util.apply_workspace_edit(action.edit)
+      end
+      if type(action.command) == "table" then
+        vim.lsp.buf.execute_command(action.command)
+      end
+    else
+      vim.lsp.buf.execute_command(action)
     end
-    if type(action.command) == "table" then
-      vim.lsp.buf.execute_command(action.command)
-    end
-  else
-    vim.lsp.buf.execute_command(action)
-  end
-end,
+  end,
 })
 
 vim.api.nvim_create_autocmd('BufWritePre', {
@@ -89,16 +89,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = 'Others',
   pattern = { '*' },
   callback = function()
-    vim.highlight.on_yank {timeout = 400, on_visual = false}
+    vim.highlight.on_yank { timeout = 400, on_visual = false }
   end,
 })
 
-vim.api.nvim_create_augroup('packer_user_config', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-  group = 'packer_user_config',
-  pattern = { '*.lua' },
-  command = 'PackerCompile',
-})
+-- vim.api.nvim_create_augroup('packer_user_config', { clear = true })
+-- vim.api.nvim_create_autocmd('BufWritePost', {
+--   group = 'packer_user_config',
+--   pattern = { '*.lua' },
+--   command = 'PackerCompile',
+-- })
 
 -- START COPYPASTA https://github.com/neovim/neovim/commit/5b04e46d23b65413d934d812d61d8720b815eb1c
 local util = require 'vim.lsp.util'

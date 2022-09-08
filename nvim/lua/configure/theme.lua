@@ -33,6 +33,7 @@ return {
             })
         end},
         {'terrortylor/nvim-comment', config = require('nvim_comment').setup()},
+        {'levouh/tint.nvim', config = require('tint.nvim').setup()},
     },
     config = function()
         vim.g.nord_borders = true
