@@ -136,6 +136,14 @@
                     "to": {
                         "key_code": "escape"
                     }
+                },
+                {
+                    "from": {
+                        "key_code": "escape"
+                    },
+                    "to": {
+                        "key_code": "tab"
+                    }
                 }
             ],
             "virtual_hid_keyboard": {
