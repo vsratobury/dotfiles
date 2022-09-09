@@ -25,7 +25,7 @@ return require('packer').startup(function(use)
   -- tint inactive windows
   use { 'levouh/tint.nvim', config = function()
     require("tint").setup({
-      tint = -65, -- Darken colors, use a positive value to brighten
+      tint = -20, -- Darken colors, use a positive value to brighten
       saturation = 0.2, -- Saturation to preserve
       transforms = require("tint").transforms.SATURATE_TINT, -- Showing default behavior, but value here can be predefined set of transforms
       tint_background_colors = true, -- Tint background portions of highlight groups
@@ -124,6 +124,8 @@ return require('packer').startup(function(use)
   use(require('configure.lsp'))
   -- use (require('configure.orgmode'))
   use(require('configure.telescope'))
+  -- language tanslate
+  use(require('configure.translate'))
   -- treesitter pluggins configure
   use(require('configure.treesitter'))
   -- treesitter support for spelling (on nvim version >= 0.8 depricated)
