@@ -22,11 +22,19 @@ M.default = {
   -- with leader key
   { '<Leader>', mode = 'n', {
     { 't', ':vsplit +terminal<cr>' },
-    { 'q', ':q<cr>' },
-    { 'Q', ':qa<cr>' },
-    { 's', ':w<cr>' },
-    { 'S', ':wa<cr>' },
+    { 'q', ':qa<cr>' },
+    { 'Q', ':qa!<cr>' },
+    { 's', ':wa<cr>' },
+    { 'S', ':wa!<cr>' },
     { 'c', ':bd<cr>' },
+    { 'C', ':bd!<cr>' },
+    -- LSP functions
+    { 'lf', ':lua vim.lsp.buf.formatting()<cr>' },
+    { 'ld', ':lua vim.lsp.buf.lsp_code_action()<cr>' },
+    { 'lm', ':lua vim.lsp.buf.rename()<cr>' },
+    { ',', ':lua vim.lsp.diagnostic.goto_prev()<cr>' },
+    { ';', ':lua vim.lsp.diagnostic.goto_next()<cr>' },
+    -- telescope functions
     { 'p', ':lua require("telescope").extensions.project.project{ display_type = "full" }<cr>' },
     { 'o', ':Telescope oldfiles<cr>' },
     { 'f', ':Telescope find_files<cr>' },
@@ -34,13 +42,17 @@ M.default = {
     { 'J', ':Telescope jumplist<cr>' },
     { 'g', ':Telescope live_grep<cr>' },
     { 'b', ':Telescope current_buffer_fuzzy_find<cr>' },
-    { 'lf', ':lua vim.lsp.buf.formatting()<cr>' },
-    { 'ld', ':lua vim.lsp.buf.lsp_code_action()<cr>' },
-    { 'lm', ':lua vim.lsp.buf.rename()<cr>' },
-    { ',', ':lua vim.lsp.diagnostic.goto_prev()<cr>' },
-    { ';', ':lua vim.lsp.diagnostic.goto_next()<cr>' },
     { 'lr', ':Telescope lsp_references<cr>' },
-    { 'ls', ':Telescope lsp_document_symbols<cr>' }
+    { 'ls', ':Telescope lsp_document_symbols<cr>' },
+    -- dap debug functions
+    { 'ds',
+      ':lua require("dap.ext.vscode").load_launchjs(nil, {codelldb = {"cpp", "c"}}); require("dap").continue()<cr>' },
+    { 'dw', ':lua require("dap").repl.toggle()<cr>' },
+    { 'dq', ':lua require("dap").terminate()<cr>:%db|e#<cr>' },
+    { 'db', ':lua require("dap").toggle_breakpoint()<cr>' },
+    { 'dl', ':lua require("dap").list_breakpoints()<cr>:copen<cr>' },
+    { 'dc', ':lua require("dap").clear_breakpoints()<cr>' },
+    { 'dr', ':lua require("dap").run_to_cursor()<cr>' },
   }
     -- {'i', '<cmd>ClangdSwitchSourceHeader<cr>'},
     -- {'lF', 'ggVG:!clang-format-mp-11 --style=llvm<cr>'},

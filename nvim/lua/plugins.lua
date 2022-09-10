@@ -104,12 +104,10 @@ return require('packer').startup(function(use)
       cmake_build_options = {},
       cmake_console_size = 10, -- cmake output window height
       cmake_show_console = "only_on_error", -- "always", "only_on_error"
-      -- cmake_dap_configuration = { name = "cpp", type = "codelldb", request = "launch" }, -- dap configuration, optional
-      -- cmake_dap_open_command = require("dap").repl.open, -- optional
+      cmake_dap_configuration = { name = "cpp", type = "codelldb", request = "launch" }, -- dap configuration, optional
+      cmake_dap_open_command = require("dap").repl.open, -- optional
     }
   end }
-  -- c++/c/rust debugging
-  use { 'mfussenegger/nvim-dap' }
   -- Tex/LaTex file type support and compiling
   use {
     'lervag/vimtex',
@@ -118,6 +116,28 @@ return require('packer').startup(function(use)
       vim.g['tex_conceal'] = 'abdmg'
     end
   }
+
+  -- c++/c/rust debugging
+  use(require('configure.dap-debug'))
+  use {
+    'theHamsta/nvim-dap-virtual-text',
+    config = function()
+      require("nvim-dap-virtual-text").setup {
+        highlight_changed_variables = true,
+        highlight_new_as_changed = false,
+        all_frames = true,
+        only_first_definition = false,
+        all_references = true,
+        virt_text_win_col = 60,
+      }
+    end
+  }
+  -- use {
+  --   'Joakker/lua-json5', run = './install.sh',
+  --   config = function()
+  --     require('dap.ext.vscode').json_decode = require('json5').parse
+  --   end
+  -- }
 
   use(require('configure.statusline'))
   use(require('configure.completions'))
