@@ -1,104 +1,86 @@
--- autocommands.lua
---
+local map = vim.api.nvim_set_keymap
 
--------------------- HELPERS -------------------------------
-local cmd = vim.cmd
-local fmt = string.format
+map('n', '<leader>f', ':lua vim.lsp.buf.formatting()<cr>', {})
+map('n', '<leader>d', ':lua vim.lsp.buf.lsp_code_action()<cr>', {})
+map('n', '<leader>m', ':lua vim.lsp.buf.rename()<cr>', {})
+map('n', '<leader>,', ':lua vim.lsp.diagnostic.goto_prev()<cr>', {})
+map('n', '<leader>;', ':lua vim.lsp.diagnostic.goto_next()<cr>', {})
+map('n', 'K', ':lua vim.lsp.buf.hover()<cr>', {})
+map('n', 'gd', ':lua vim.lsp.buf.definition()<cr>', {})
 
--------------------- COMMANDS ------------------------------
+local M = {
+  'neovim/nvim-lspconfig',
+  requires = {
+    'hrsh7th/cmp-nvim-lsp',
+  },
+  config = function()
+    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    local runtime_path = vim.split(package.path, ';')
+    table.insert(runtime_path, "lua/?.lua")
+    table.insert(runtime_path, "lua/?/init.lua")
 
-vim.api.nvim_create_augroup('Language', { clear = true })
-
-vim.api.nvim_create_autocmd('BufWritePre', {
-  group = 'Language',
-  pattern = { '*.go' },
-  callback = function()
-    local context = { only = { "source.organizeImports" } }
-    vim.validate { context = { context, "t", true } }
-
-    local params = vim.lsp.util.make_range_params()
-    params.context = context
-
-    -- See the implementation of the textDocument/codeAction callback
-    -- (lua/vim/lsp/handler.lua) for how to do this properly.
-    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
-    if not result or next(result) == nil then return end
-    local actions = result[1].result
-    if not actions then return end
-    local action = actions[1]
-
-    -- textDocument/codeAction can return either Command[] or CodeAction[]. If it
-    -- is a CodeAction, it can have either an edit, a command or both. Edits
-    -- should be executed first.
-    if action.edit or type(action.command) == "table" then
-      if action.edit then
-        vim.lsp.util.apply_workspace_edit(action.edit)
-      end
-      if type(action.command) == "table" then
-        vim.lsp.buf.execute_command(action.command)
-      end
-    else
-      vim.lsp.buf.execute_command(action)
+    for ls, cfg in pairs({
+      cmake = {
+        capabilities = capabilities
+      },
+      clangd = {
+        capabilities = capabilities
+      },
+      gopls = {
+        cmd = { "gopls", "serve" },
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+            },
+            staticcheck = true,
+          },
+        },
+        capabilities = capabilities
+      },
+      sumneko_lua = {
+        cmd = { "/Users/vsratobury/.local/lualsp/bin/lua-language-server" },
+        settings = {
+          Lua = {
+            runtime = {
+              -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+              version = 'LuaJIT',
+              -- Setup your lua path
+              path = runtime_path,
+              diagnostics = {
+                globals = { "vim" }
+              }
+            },
+            diagnostics = {
+              -- Get the language server to recognize the `vim` global
+              globals = { 'vim' },
+            },
+            workspace = {
+              -- Make the server aware of Neovim runtime files
+              library = vim.api.nvim_get_runtime_file("", true),
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+              enable = false,
+            },
+            format = {
+              enable = true,
+              -- Put format options here
+              -- NOTE: the value should be STRING!!
+              defaultConfig = {
+                indent_style = "space",
+                indent_size = "4",
+              }
+            },
+          },
+        },
+        capabilities = capabilities
+      },
+    }) do
+      require('lspconfig')[ls].setup(cfg)
     end
-  end,
-})
-
-vim.api.nvim_create_autocmd('BufWritePre', {
-  group = 'Language',
-  pattern = { 'CMake*' },
-  command = '% !cmake-format -',
-})
-
-vim.api.nvim_create_autocmd('BufEnter', {
-  group = 'Language',
-  pattern = { '*.fish' },
-  command = ':lua vim.api.nvim_buf_set_option(0, \"commentstring\", \"# %s\")',
-})
-
-vim.api.nvim_create_autocmd('BufFilePost', {
-  group = 'Language',
-  pattern = { '*.fish' },
-  command = ':lua vim.api.nvim_buf_set_option(0, \"commentstring\", \"# %s\")',
-})
-
-vim.api.nvim_create_autocmd('BufFilePost', {
-  group = 'Language',
-  pattern = { 'go' },
-  command = 'set makeprg=go\\ test',
-})
-
-vim.api.nvim_create_augroup('Others', { clear = true })
-
-vim.api.nvim_create_autocmd('TermOpen', {
-  group = 'Others',
-  pattern = { '*' },
-  callback = function()
-    cmd 'setlocal nonumber norelativenumber'
-    cmd 'setlocal nospell'
-    cmd 'setlocal signcolumn=auto'
-  end,
-})
-
-vim.api.nvim_create_autocmd('BufWritePre', {
-  group = 'Others',
-  pattern = { '*' },
-  command = '%s/\\s\\+$//e',
-})
-
-vim.api.nvim_create_autocmd('TextYankPost', {
-  group = 'Others',
-  pattern = { '*' },
-  callback = function()
-    vim.highlight.on_yank { timeout = 400, on_visual = false }
-  end,
-})
-
--- vim.api.nvim_create_augroup('packer_user_config', { clear = true })
--- vim.api.nvim_create_autocmd('BufWritePost', {
---   group = 'packer_user_config',
---   pattern = { '*.lua' },
---   command = 'PackerCompile',
--- })
+  end
+}
 
 -- START COPYPASTA https://github.com/neovim/neovim/commit/5b04e46d23b65413d934d812d61d8720b815eb1c
 local util = require 'vim.lsp.util'
@@ -107,7 +89,7 @@ local util = require 'vim.lsp.util'
 ---
 --- @param options table|nil Optional table which holds the following optional fields:
 ---     - formatting_options (table|nil):
----         Can be used to specify FormattingOptions. Some unspecified options will be
+---         Can be d to specify FormattingOptions. Some unspecified options will be
 ---         automatically derived from the current Neovim options.
 ---         @see https://microsoft.github.io/language-server-protocol/specification#textDocument_formatting
 ---     - timeout_ms (integer|nil, default 1000):
@@ -117,7 +99,7 @@ local util = require 'vim.lsp.util'
 ---         Restrict formatting to the clients attached to the given buffer, defaults to the current
 ---         buffer (0).
 ---     - filter (function|nil):
----         Predicate to filter clients used for formatting. Receives the list of clients attached
+---         Predicate to filter clients d for formatting. Receives the list of clients attached
 ---         to bufnr as the argument and must return the list of clients on which to request
 ---         formatting. Example:
 ---
@@ -195,3 +177,5 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     }
   end
 })
+
+return M
