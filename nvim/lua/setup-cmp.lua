@@ -1,4 +1,3 @@
-
 -- nvim-cmp setup
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -6,14 +5,14 @@ local has_words_before = function()
 end
 
 local M = {
-   { 'hrsh7th/cmp-buffer' },
-   { 'hrsh7th/cmp-path' },
-   { 'hrsh7th/cmp-cmdline' },
-   { 'hrsh7th/vim-vsnip' },
-   { 'hrsh7th/cmp-vsnip' },
-   { 'rafamadriz/friendly-snippets' },
-   { 'mtoohey31/cmp-fish' },
-   { 'hrsh7th/nvim-cmp',
+  { 'hrsh7th/cmp-buffer' },
+  { 'hrsh7th/cmp-path' },
+  { 'hrsh7th/cmp-cmdline' },
+  { 'hrsh7th/vim-vsnip' },
+  { 'hrsh7th/cmp-vsnip' },
+  { 'rafamadriz/friendly-snippets' },
+  { 'mtoohey31/cmp-fish' },
+  { 'hrsh7th/nvim-cmp',
     config = function()
       local cmp = require('cmp')
       cmp.setup({
@@ -89,6 +88,6 @@ local M = {
         })
       })
     end }
-  }
+}
 
 return M
