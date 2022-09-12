@@ -21,14 +21,16 @@ vim.keymap.set('i', '<C-i>', function()
   return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
 end, { expr = true })
 
-map('n', '<leader>t', ':vsplit +terminal<cr>',{})
-map('t', '<ESC>', '<C-\\><C-n>',{})
+map('n', '<leader>t', ':vsplit +terminal<cr>', {})
+map('t', '<ESC>', '<C-\\><C-n>', {})
+
 -- change keymap
-map('n', '<C-Space>', 'i<C-^><ESC>',{})
-map('i', '<C-Space>', '<C-^>',{})
-map('c', '<C-Space>', '<C-^><ESC>',{})
+map('n', '<C-Space>', 'i<C-^><ESC>', {})
+map('i', '<C-Space>', '<C-^>', {})
+map('c', '<C-Space>', '<C-^><ESC>', {})
+
 -- enable spelling
-map('n', '<F2>', ':setlocal spell!<cr>',{})
+map('n', '<F2>', ':setlocal spell!<cr>', {})
 
 require('disable-builtins')
 require('setup-options')
@@ -48,30 +50,28 @@ require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- packer it self
   use 'nvim-lua/plenary.nvim' -- utility library
 
--- load and configure modules
---
--- user interface
-use (require('setup-ui'))
--- searching and selections support
-use (require('setup-ss'))
--- about file type support
-use (require('setup-ft'))
--- version control support
-use (require('setup-vcs'))
--- text highlighting and spelling support
-use (require('setup-text'))
--- completion and snippet support
-use (require('setup-cmp'))
--- language server protocol support
-use (require('setup-lsp'))
--- compiling and building support
-use (require('setup-make'))
--- source debugging support
-use (require('setup-dap'))
+  -- load and configure modules
+  --
+  -- user interface
+  use(require('setup-ui'))
+  -- searching and selections support
+  use(require('setup-ss'))
+  -- about file type support
+  use(require('setup-ft'))
+  -- version control support
+  use(require('setup-vcs'))
+  -- text highlighting and spelling support
+  use(require('setup-text'))
+  -- completion and snippet support
+  use(require('setup-cmp'))
+  -- language server protocol support
+  use(require('setup-lsp'))
+  -- source debugging support
+  use(require('setup-dap'))
 
-if packer_bootstrap then
-  require('packer').sync()
-end
+  if packer_bootstrap then
+    require('packer').sync()
+  end
 end)
 
 vim.api.nvim_create_augroup('Others', { clear = true })
@@ -99,4 +99,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank { timeout = 400, on_visual = false }
   end,
 })
-

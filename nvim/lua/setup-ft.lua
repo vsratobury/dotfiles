@@ -1,3 +1,8 @@
+local map = vim.api.nvim_set_keymap
+
+map('n', '<F4>', ':CMakeRun<cr>', {})
+map('n', '<F5>', ':CMakeBuild<cr>', {})
+
 local M = {
   -- fish file type support
   { 'ericvw/vim-fish' },
@@ -9,7 +14,22 @@ local M = {
       vim.g['vimtex_view_method'] = 'skim'
       vim.g['tex_conceal'] = 'abdmg'
     end
-  }
+  },
+
+  { 'Civitasv/cmake-tools.nvim',
+    config = function()
+      require("cmake-tools").setup {
+        cmake_command = "cmake",
+        cmake_build_directory = "build",
+        cmake_build_type = "Debug",
+        cmake_generate_options = { "-G", "Ninja" },
+        cmake_build_options = {},
+        cmake_console_size = 10, -- cmake output window height
+        cmake_show_console = "only_on_error", -- "always", "only_on_error"
+        cmake_dap_configuration = { name = "cpp", type = "codelldb", request = "launch" }, -- dap configuration, optional
+        cmake_dap_open_command = require("dap").repl.open, -- optional
+      }
+    end }
 }
 
 vim.api.nvim_create_augroup('Language', { clear = true })

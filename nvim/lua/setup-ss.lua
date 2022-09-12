@@ -1,19 +1,21 @@
 local map = vim.api.nvim_set_keymap
 
 map('n', '<leader>p', ':lua require("telescope").extensions.project.project{ display_type = "full" }<cr>', {})
-map('n', '<leader>o', ':Telescope oldfiles<cr>',{})
-map('n', '<leader>f', ':Telescope find_files<cr>',{})
-map('n', '<leader>j', ':Telescope buffers<cr>',{})
-map('n', '<leader>J', ':Telescope jumplist<cr>',{})
-map('n', '<leader>g', ':Telescope live_grep<cr>',{})
-map('n', '<leader>b', ':Telescope current_buffer_fuzzy_find<cr>',{})
-map('n', '<leader>lr', ':Telescope lsp_references<cr>',{})
-map('n', '<leader>ls', ':Telescope lsp_document_symbols<cr>',{})
+map('n', '<leader>o', ':Telescope oldfiles<cr>', {})
+map('n', '<leader>f', ':Telescope find_files<cr>', {})
+map('n', '<leader>j', ':Telescope buffers<cr>', {})
+map('n', '<leader>J', ':Telescope jumplist<cr>', {})
+map('n', '<leader>g', ':Telescope live_grep<cr>', {})
+map('n', '<leader>b', ':Telescope current_buffer_fuzzy_find<cr>', {})
+map('n', '<leader>lr', ':Telescope lsp_references<cr>', {})
+map('n', '<leader>ls', ':Telescope lsp_document_symbols<cr>', {})
 
 local M = {
-   { 'nvim-telescope/telescope-project.nvim' },
-   { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-   { 'nvim-telescope/telescope.nvim', tag = '0.1.0',
+  { 'nvim-telescope/telescope-project.nvim' },
+
+  { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+
+  { 'nvim-telescope/telescope.nvim', tag = '0.1.0',
     requires = {
       'nvim-telescope/telescope-project.nvim',
       'nvim-telescope/telescope-fzf-native.nvim'
@@ -61,6 +63,6 @@ local M = {
       require('telescope').load_extension('project')
       require('telescope').load_extension('fzf')
     end }
-  }
+}
 
 return M

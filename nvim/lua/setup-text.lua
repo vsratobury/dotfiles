@@ -1,6 +1,10 @@
 local M = {
+  -- smart commenting
+  { 'terrortylor/nvim-comment',
+    config = function() require('nvim_comment').setup() end },
+
   -- treesitter support for spelling (on nvim version >= 0.8 depricated)
-   { 'lewis6991/spellsitter.nvim',
+  { 'lewis6991/spellsitter.nvim',
     config = function()
       require('spellsitter').setup()
       vim.api.nvim_create_augroup('Spell', { clear = true })
@@ -10,8 +14,10 @@ local M = {
         group = 'Spell',
       })
     end },
-   { 'nvim-treesitter/nvim-treesitter-textobjects', branch = '0.5-compat' },
-   { 'nvim-treesitter/nvim-treesitter', branch = 'master', run = ':TSUpdate',
+
+  { 'nvim-treesitter/nvim-treesitter-textobjects', branch = '0.5-compat' },
+
+  { 'nvim-treesitter/nvim-treesitter', branch = 'master', run = ':TSUpdate',
     config = function()
       require('nvim-treesitter.configs').setup {
         ensure_installed = { 'go', 'cpp', 'c', 'lua', 'python', 'fish', 'vim', 'ninja', 'cmake', 'bash', 'fortran',
@@ -65,6 +71,6 @@ local M = {
         },
       }
     end }
-  }
+}
 
 return M

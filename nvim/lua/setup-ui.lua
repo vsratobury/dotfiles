@@ -4,7 +4,7 @@ local M = {
     config = function() vim.cmd('colorscheme nordfox') end },
 
   -- tint inactive windows
-   { 'levouh/tint.nvim',
+  { 'levouh/tint.nvim',
     config = function()
       require("tint").setup({
         tint = -20, -- Darken colors,  a positive value to brighten
@@ -24,7 +24,7 @@ local M = {
     end },
 
   -- status line
-   { 'vsratobury/nvim-hardline',
+  { 'vsratobury/nvim-hardline',
     config = function()
       require('hardline').setup({
         bufferline = true,
@@ -46,12 +46,8 @@ local M = {
       })
     end },
 
-  -- smart commenting
-   { 'terrortylor/nvim-comment',
-    config = function() require('nvim_comment').setup() end },
-
   -- wich key for keymapping
-   { 'folke/which-key.nvim',
+  { 'folke/which-key.nvim',
     config = function()
       require('which-key').setup({
         plugins = {
@@ -64,12 +60,12 @@ local M = {
     end },
 
   -- show ident lines
-   { 'lukas-reineke/indent-blankline.nvim',
+  { 'lukas-reineke/indent-blankline.nvim',
     config = function()
       vim.g['indent_blankline_char'] = '┊'
       vim.g['indent_blankline_buftype_exclude'] = { 'terminal' }
       vim.g['indent_blankline_filetype_exclude'] = { 'fugitive', 'fzf', 'help', 'man' }
     end }
-  }
+}
 
 return M

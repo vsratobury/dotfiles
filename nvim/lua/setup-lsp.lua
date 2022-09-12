@@ -1,10 +1,10 @@
 local map = vim.api.nvim_set_keymap
 
-map('n', '<leader>f', ':lua vim.lsp.buf.formatting()<cr>', {})
-map('n', '<leader>d', ':lua vim.lsp.buf.lsp_code_action()<cr>', {})
-map('n', '<leader>m', ':lua vim.lsp.buf.rename()<cr>', {})
-map('n', '<leader>,', ':lua vim.lsp.diagnostic.goto_prev()<cr>', {})
-map('n', '<leader>;', ':lua vim.lsp.diagnostic.goto_next()<cr>', {})
+map('n', '<leader>lf', ':lua vim.lsp.buf.formatting()<cr>', {})
+map('n', '<leader>ld', ':lua vim.lsp.buf.lsp_code_action()<cr>', {})
+map('n', '<leader>lm', ':lua vim.lsp.buf.rename()<cr>', {})
+map('n', '<leader>l,', ':lua vim.lsp.diagnostic.goto_prev()<cr>', {})
+map('n', '<leader>l;', ':lua vim.lsp.diagnostic.goto_next()<cr>', {})
 map('n', 'K', ':lua vim.lsp.buf.hover()<cr>', {})
 map('n', 'gd', ':lua vim.lsp.buf.definition()<cr>', {})
 
