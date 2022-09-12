@@ -15,6 +15,23 @@ local M = {
       })
     end },
 
+  { "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup({
+        fast_wrap = {
+          map = '<M-e>',
+          chars = { '{', '[', '(', '"', "'" },
+          pattern = [=[[%'%"%)%>%]%)%}%,]]=],
+          end_key = '$',
+          keys = 'qwertyuiopzxcvbnmasdfghjkl',
+          check_comma = true,
+          highlight = 'Search',
+          highlight_grey = 'Comment'
+        },
+        map_c_h = true
+      })
+    end
+  },
+
   { 'nvim-treesitter/nvim-treesitter-textobjects', branch = '0.5-compat' },
 
   { 'nvim-treesitter/nvim-treesitter', branch = 'master', run = ':TSUpdate',
