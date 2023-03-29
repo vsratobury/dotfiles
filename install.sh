@@ -19,8 +19,8 @@ cp -R ./kitty.app /Applications/
 # setup fonts
 cd -
 mkdir .fonts
-curl -L -o hack-font.zip https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.zip
-unzip -j hack-font.zip -d .fonts/ && rm hack-font.zip
+curl -L -o hack-font.zip https://github.com/tonsky/FiraCode/releases/download/6.2/Fira_Code_v6.2.zip
+unzip -j Fira_Code_v6.2.zip -d .fonts/ && rm Fira_Code_v6.2.zip
 fc-cache -fv
 
 # install FZF
@@ -42,14 +42,14 @@ port install fish && chpass -s /opt/local/bin/fish ${USER}
 # curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
 
 # install go and others
-echo "download latest go package, then return ot install"
-open https://go.dev/dl/
+#echo "download latest go package, then return ot install"
+#open https://go.dev/dl/
 
-read -n 1 -s -r -p "Press any key to continue"
+#read -n 1 -s -r -p "Press any key to continue"
 
-go install golang.org/x/tools/gopls@latest
-go install golang.org/x/lint@latest
-go install golang.org/x/tools/cmd/godoc@latest
+#go install golang.org/x/tools/gopls@latest
+#go install golang.org/x/lint@latest
+#go install golang.org/x/tools/cmd/godoc@latest
 
 # install cmake lsp
 port install py39-pip
