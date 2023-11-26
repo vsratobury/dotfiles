@@ -8,21 +8,22 @@ map('n', '<leader>l;', ':lua vim.lsp.diagnostic.goto_next()<cr>', {})
 map('n', 'K', ':lua vim.lsp.buf.hover()<cr>', {})
 map('n', 'gd', ':lua vim.lsp.buf.definition()<cr>', {})
 map('n', '<C-h>', ':ClangdSwitchSourceHeader<cr>', {})
-map('n', '<F10>', ':SymbolsOutline<cr>', {})
+map('n', '<F12>', ':SymbolsOutline<cr>', {})
 
 local M = {
-  { 'neovim/nvim-lspconfig',
+  {
+    'neovim/nvim-lspconfig',
     requires = {
       'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
-      local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
       local runtime_path = vim.split(package.path, ';')
       table.insert(runtime_path, "lua/?.lua")
       table.insert(runtime_path, "lua/?/init.lua")
 
       for ls, cfg in pairs({
-        cmake = {
+        neocmake = {
           capabilities = capabilities
         },
         clangd = {
@@ -40,18 +41,12 @@ local M = {
           },
           capabilities = capabilities
         },
-        sumneko_lua = {
-          cmd = { "/Users/vsratobury/.local/lualsp/bin/lua-language-server" },
+        lua_ls = {
           settings = {
             Lua = {
               runtime = {
                 -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
                 version = 'LuaJIT',
-                -- Setup your lua path
-                path = runtime_path,
-                diagnostics = {
-                  globals = { "vim" }
-                }
               },
               diagnostics = {
                 -- Get the language server to recognize the `vim` global
@@ -65,27 +60,59 @@ local M = {
               telemetry = {
                 enable = false,
               },
-              format = {
-                enable = true,
-                -- Put format options here
-                -- NOTE: the value should be STRING!!
-                defaultConfig = {
-                  indent_style = "space",
-                  indent_size = "4",
-                }
-              },
             },
           },
           capabilities = capabilities
         },
+        -- sumneko_lua = {
+        --   cmd = { "/Users/vsratobury/.local/lualsp/bin/lua-language-server" },
+        --   settings = {
+        --     Lua = {
+        --       runtime = {
+        --         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        --         version = 'LuaJIT',
+        --         -- Setup your lua path
+        --         path = runtime_path,
+        --         diagnostics = {
+        --           globals = { "vim" }
+        --         }
+        --       },
+        --       diagnostics = {
+        --         -- Get the language server to recognize the `vim` global
+        --         globals = { 'vim' },
+        --       },
+        --       workspace = {
+        --         -- Make the server aware of Neovim runtime files
+        --         library = vim.api.nvim_get_runtime_file("", true),
+        --       },
+        --       -- Do not send telemetry data containing a randomized but unique identifier
+        --       telemetry = {
+        --         enable = false,
+        --       },
+        --       format = {
+        --         enable = true,
+        --         -- Put format options here
+        --         -- NOTE: the value should be STRING!!
+        --         defaultConfig = {
+        --           indent_style = "space",
+        --           indent_size = "4",
+        --         }
+        --       },
+        --     },
+        --   },
+        --   capabilities = capabilities
+        -- },
       }) do
         require('lspconfig')[ls].setup(cfg)
       end
-    end },
+    end
+  },
 
-  { 'simrat39/symbols-outline.nvim', config = function()
-    require('symbols-outline').setup()
-  end
+  {
+    'simrat39/symbols-outline.nvim',
+    config = function()
+      require('symbols-outline').setup()
+    end
   }
 }
 

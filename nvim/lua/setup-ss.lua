@@ -15,7 +15,9 @@ local M = {
 
   { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
 
-  { 'nvim-telescope/telescope.nvim', tag = '0.1.0',
+  {
+    'nvim-telescope/telescope.nvim',
+    -- tag = '0.1.4',
     requires = {
       'nvim-telescope/telescope-project.nvim',
       'nvim-telescope/telescope-fzf-native.nvim'
@@ -62,7 +64,8 @@ local M = {
       }
       require('telescope').load_extension('project')
       require('telescope').load_extension('fzf')
-    end }
+    end
+  }
 }
 
 return M

@@ -1,8 +1,5 @@
 local map = vim.api.nvim_set_keymap
 
-map('n', '<F4>', ':CMakeRun<cr>', {})
-map('n', '<F5>', ':CMakeBuild<cr>', {})
-
 local M = {
   -- fish file type support
   { 'ericvw/vim-fish' },
@@ -16,7 +13,8 @@ local M = {
     end
   },
 
-  { 'Civitasv/cmake-tools.nvim',
+  {
+    'Civitasv/cmake-tools.nvim',
     config = function()
       require("cmake-tools").setup {
         cmake_command = "cmake",
@@ -24,12 +22,13 @@ local M = {
         cmake_build_type = "Debug",
         cmake_generate_options = { "-G", "Ninja" },
         cmake_build_options = {},
-        cmake_console_size = 10, -- cmake output window height
-        cmake_show_console = "only_on_error", -- "always", "only_on_error"
+        cmake_console_size = 10,                                                           -- cmake output window height
+        cmake_show_console = "only_on_error",                                              -- "always", "only_on_error"
         cmake_dap_configuration = { name = "cpp", type = "codelldb", request = "launch" }, -- dap configuration, optional
-        cmake_dap_open_command = require("dap").repl.open, -- optional
+        cmake_dap_open_command = require("dap").repl.open,                                 -- optional
       }
-    end }
+    end
+  }
 }
 
 vim.api.nvim_create_augroup('Language', { clear = true })
@@ -78,6 +77,12 @@ vim.api.nvim_create_autocmd('BufEnter', {
   group = 'Language',
   pattern = { '*.fish' },
   command = ':lua vim.api.nvim_buf_set_option(0, \"commentstring\", \"# %s\")',
+})
+
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = 'Language',
+  pattern = { '*.cpp', '*.h' },
+  command = ':lua vim.api.nvim_buf_set_option(0, \"commentstring\", \"// %s\")',
 })
 
 vim.api.nvim_create_autocmd('BufFilePost', {

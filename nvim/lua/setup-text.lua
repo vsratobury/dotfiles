@@ -1,10 +1,27 @@
 local M = {
   -- smart commenting
-  { 'terrortylor/nvim-comment',
-    config = function() require('nvim_comment').setup() end },
+  -- {
+  --   'JoosepAlviste/nvim-ts-context-commentstring',
+  --   config = function()
+  --     require('ts_context_commentstring').setup({
+  --       enable_autocmd = true,
+  --     })
+  --   end
+  -- },
+  {
+    'terrortylor/nvim-comment',
+    config = function()
+      require('nvim_comment').setup({
+        -- hook = function()
+        --   require('ts_context_commentstring').update_commentstring()
+        -- end,
+      })
+    end
+  },
 
   -- treesitter support for spelling (on nvim version >= 0.8 depricated)
-  { 'lewis6991/spellsitter.nvim',
+  {
+    'lewis6991/spellsitter.nvim',
     config = function()
       require('spellsitter').setup()
       vim.api.nvim_create_augroup('Spell', { clear = true })
@@ -13,10 +30,13 @@ local M = {
         command = "setlocal nospell",
         group = 'Spell',
       })
-    end },
+    end
+  },
 
-  { "windwp/nvim-autopairs",
-    config = function() require("nvim-autopairs").setup({
+  {
+    "windwp/nvim-autopairs",
+    config = function()
+      require("nvim-autopairs").setup({
         fast_wrap = {
           map = '<M-e>',
           chars = { '{', '[', '(', '"', "'" },
@@ -32,7 +52,8 @@ local M = {
     end
   },
 
-  { "kylechui/nvim-surround",
+  {
+    "kylechui/nvim-surround",
     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
     config = function()
       require("nvim-surround").setup({
@@ -42,8 +63,10 @@ local M = {
   },
 
   { 'nvim-treesitter/nvim-treesitter-textobjects', branch = '0.5-compat' },
-
-  { 'nvim-treesitter/nvim-treesitter', branch = 'master', run = ':TSUpdate',
+  {
+    'nvim-treesitter/nvim-treesitter',
+    branch = 'master',
+    run = ':TSUpdate',
     config = function()
       require('nvim-treesitter.configs').setup {
         ensure_installed = { 'go', 'cpp', 'c', 'lua', 'python', 'fish', 'vim', 'ninja', 'cmake', 'bash', 'fortran',
@@ -58,10 +81,14 @@ local M = {
             enable = true,
             lookahead = true,
             keymaps = {
-              ['aa'] = '@parameter.outer', ['ia'] = '@parameter.inner',
-              ['af'] = '@function.outer', ['if'] = '@function.inner',
-              ['ac'] = '@class.outer', ['ic'] = '@class.inner',
-              ['ab'] = '@block.outer', ['ib'] = '@block.inner',
+              ['aa'] = '@parameter.outer',
+              ['ia'] = '@parameter.inner',
+              ['af'] = '@function.outer',
+              ['if'] = '@function.inner',
+              ['ac'] = '@class.outer',
+              ['ic'] = '@class.inner',
+              ['ab'] = '@block.outer',
+              ['ib'] = '@block.inner',
             },
           },
           swap = {
@@ -96,7 +123,8 @@ local M = {
           },
         },
       }
-    end }
+    end
+  }
 }
 
 return M
