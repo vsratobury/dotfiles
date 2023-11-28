@@ -1,14 +1,15 @@
 function fish_right_prompt
     # show jobs count
     set -l jobs_count (jobs --pid | count)
-    if test $jobs_count -gt 1
+    if test $jobs_count -gt 0
         set_color red
-        echo "jobs: "(math $jobs_count -1)" "
+        echo "[" $jobs_count "]"
     end
 
     # show date and time
-    set_color white
-    echo (date '+%a, %d %b %H:%M')" "
+    # set_color white
+    # echo "< "
+    # echo (date '+%H:%M')" "
 
     # battery status
     set -l bat_value (pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
