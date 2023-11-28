@@ -79,9 +79,13 @@ local M = {
   {
     'lukas-reineke/indent-blankline.nvim',
     config = function()
-      vim.g['indent_blankline_char'] = '┊'
-      vim.g['indent_blankline_buftype_exclude'] = { 'terminal' }
-      vim.g['indent_blankline_filetype_exclude'] = { 'fugitive', 'fzf', 'help', 'man' }
+      require('ibl').setup({
+        indent = { char = "┊" },
+        scope = { enabled = false },
+      })
+      -- vim.g['indent_blankline_char'] = '┊'
+      -- vim.g['indent_blankline_buftype_exclude'] = { 'terminal' }
+      -- vim.g['indent_blankline_filetype_exclude'] = { 'fugitive', 'fzf', 'help', 'man' }
     end
   }
 }
