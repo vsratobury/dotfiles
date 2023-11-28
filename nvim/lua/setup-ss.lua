@@ -1,6 +1,6 @@
 local map = vim.api.nvim_set_keymap
 
-map('n', '<leader>p', ':lua require("telescope").extensions.project.project{ display_type = "full" }<cr>', {})
+map('n', '<leader>p', ':lua require("telescope").extensions.project.project{display_type = "full"}<cr>', {})
 map('n', '<leader>o', ':Telescope oldfiles<cr>', {})
 map('n', '<leader>f', ':Telescope find_files<cr>', {})
 map('n', '<leader>j', ':Telescope buffers<cr>', {})

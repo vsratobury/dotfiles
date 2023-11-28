@@ -34,23 +34,32 @@ local M = {
   },
 
   {
-    "windwp/nvim-autopairs",
+    'm4xshen/autoclose.nvim',
     config = function()
-      require("nvim-autopairs").setup({
-        fast_wrap = {
-          map = '<M-e>',
-          chars = { '{', '[', '(', '"', "'" },
-          pattern = [=[[%'%"%)%>%]%)%}%,]]=],
-          end_key = '$',
-          keys = 'qwertyuiopzxcvbnmasdfghjkl',
-          check_comma = true,
-          highlight = 'Search',
-          highlight_grey = 'Comment'
-        },
-        map_c_h = true
+      require("autoclose").setup({
+        options = { pair_spaces = true }
       })
     end
   },
+
+  -- {
+  --   "windwp/nvim-autopairs",
+  --   config = function()
+  --     require("nvim-autopairs").setup({
+  --       fast_wrap = {
+  --         map = '<M-e>',
+  --         chars = { '{', '[', '(', '"', "'" },
+  --         pattern = [=[[%'%"%)%>%]%)%}%,]]=],
+  --         end_key = '$',
+  --         keys = 'qwertyuiopzxcvbnmasdfghjkl',
+  --         check_comma = true,
+  --         highlight = 'Search',
+  --         highlight_grey = 'Comment'
+  --       },
+  --       map_c_h = true
+  --     })
+  --   end
+  -- },
 
   {
     "kylechui/nvim-surround",

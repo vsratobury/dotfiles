@@ -86,6 +86,7 @@ vim.api.nvim_create_autocmd('TermOpen', {
   end,
 })
 
+-- remove sequence of spaces
 vim.api.nvim_create_autocmd('BufWritePre', {
   group = 'Others',
   pattern = { '*' },
