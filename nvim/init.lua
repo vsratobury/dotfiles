@@ -21,7 +21,7 @@ vim.keymap.set('i', '<C-i>', function()
   return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
 end, { expr = true })
 
-map('n', '<leader>t', ':vsplit +terminal<cr>', {})
+map('n', '<leader>t', ':vsplit term://fish<cr>', {})
 map('t', '<ESC>', '<C-\\><C-n>', {})
 
 -- change keymap
@@ -48,7 +48,7 @@ require('packer').init({ ensure_dependencies = true, auto_clean = true })
 
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- packer it self
-  use 'nvim-lua/plenary.nvim' -- utility library
+  use 'nvim-lua/plenary.nvim'  -- utility library
 
   -- load and configure modules
   --
