@@ -1,7 +1,8 @@
 vim.api.nvim_set_keymap('n', '<leader>gg', ':Git<cr>', {})
-vim.api.nvim_set_keymap('n', '<leader>gs', ':Gitsigns attach<cr>', {})
-vim.api.nvim_set_keymap('n', '<leader>gh', ':Gitsigns detach<cr>', {})
+vim.api.nvim_set_keymap('n', '<leader>ga', ':Gitsigns attach<cr>', {})
+vim.api.nvim_set_keymap('n', '<leader>gd', ':Gitsigns detach<cr>', {})
 vim.api.nvim_set_keymap('n', '<leader>gl', ':Gitsigns toggle_current_line_blame<cr>', {})
+vim.api.nvim_set_keymap('n', '<leader>gv', ':Gitsigns preview_hunk_inline <cr>', {})
 
 local M = {
   -- git support
